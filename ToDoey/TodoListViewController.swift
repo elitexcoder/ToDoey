@@ -11,8 +11,8 @@ import UIKit
 class TodoListViewController: UITableViewController {
     
     // Start of any properties, methods, etc that need to be initialized.
-    let itemArray = ["Cards","Cup's And Balls","Magic Wand","Money"]
-
+    var itemArray = ["Cards","Cup's And Balls","Magic Wand","Money"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +40,7 @@ class TodoListViewController: UITableViewController {
     //MARK -- TableView Delegates
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
- 
+        
         // Conditional to check if Item has been Checked Off or Not.
         if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
             tableView.cellForRow(at: indexPath)?.accessoryType = .none
@@ -53,5 +53,38 @@ class TodoListViewController: UITableViewController {
         
     } //End Of Func
     
-}
+    
+    //MARK -- Add Items Code & Methods
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        // Vairbles needed for Scope.
+        var textFiled = UITextField()
+        
+        // Create Alert Box IOS
+        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            
+            self.itemArray.append(textFiled.text!)// Append data to Array.
+            self.tableView.reloadData()
+            
+            
+            
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Enter Data"
+            textFiled = alertTextField
+            
+            
+            
+            
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+}// End Main Class
 
