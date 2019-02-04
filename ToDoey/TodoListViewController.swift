@@ -64,7 +64,7 @@ class TodoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             
-            self.itemArray.append(textFiled.text!)// Append data to Array.
+            self.itemArray.append(textFiled.text!)// Append data to Array and reloads Table.
             self.tableView.reloadData()
             
             
