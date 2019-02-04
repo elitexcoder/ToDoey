@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ToDoListViewController.swift
 //  ToDoey
 //
 //  Created by JOHN G MARTIN on 2/3/19.
@@ -13,8 +13,19 @@ class TodoListViewController: UITableViewController {
     // Start of any properties, methods, etc that need to be initialized.
     var itemArray = ["Cards","Cup's And Balls","Magic Wand","Money"]
     
+    // UserDefaults Code Starts Here.
+    let defaults = UserDefaults.standard
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let items = defaults.array(forKey: "ToDoListArray") as? [String] {
+            itemArray = items
+            
+            
+        }
         
         
         
@@ -64,7 +75,14 @@ class TodoListViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             
-            self.itemArray.append(textFiled.text!)// Append data to Array and reloads Table.
+            
+            self.itemArray.append(textFiled.text!) // Append data to Array and reloads Table.
+            
+            //UserDefaults Code To Save Item
+            self.defaults.set(self.itemArray, forKey: "ToDoListArray")
+            
+            
+            
             self.tableView.reloadData()
             
             
@@ -73,9 +91,6 @@ class TodoListViewController: UITableViewController {
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Enter Data"
             textFiled = alertTextField
-            
-            
-            
             
         }
         
